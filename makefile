@@ -13,7 +13,7 @@ SRCS := $(wildcard $(SRC_DIR)/*.c)
 OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 # The final executable name
-TARGET := my_program
+TARGET := doorPi
 
 # Build rule for object files
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
