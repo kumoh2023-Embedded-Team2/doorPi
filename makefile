@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -Wall -Wextra -Iinclude
-LDFLAGS := -lwiringPi
+LDFLAGS := -lwiringPi -lnfc -I/usr/local/include/nfc -L/usr/local/lib
 
 SRC_DIR := src
 INCLUDE_DIR := include
