@@ -7,6 +7,8 @@
 
 #define PW_LEN 4
 
-unsigned char readKeypad(void);
 void touchInit(void);
+void reedNumPad(void);
 void getPassword(char*);
+unsigned char readKeypad(void);
+void compareNum(char*, const char*);

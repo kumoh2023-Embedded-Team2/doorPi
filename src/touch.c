@@ -8,12 +8,27 @@
 #define SDO_PIN 7
 
 #define PW_LEN 4
+#define TOUCH_NUM "13131313"
 
 void touchInit()
 {
     pinMode(SCL_PIN, OUTPUT);
     pinMode(SDO_PIN, INPUT);
     printf("HW136 터치패드 초기화 완료\n");
+}
+
+void reedNumPad(){
+    printf("터치패드 인식 기다리는 중...\n");
+    const char *expectedNum = TOUCH_NUM;
+
+    while(1){
+        char password[32];
+        getPassword(password);
+        printf("인식 번호: %s\n", password);
+
+        compareNum(password, expectedNum);
+        printf("터치패드 인식 기다리는 중...\n");
+    }
 }
 
 void getPassword(char *password)
@@ -49,4 +64,14 @@ unsigned char readKeypad()
     }
 
     return Key_State;
+}
+
+void compareNum(char* password, const char* expectedNum) {
+  if (strcmp(password, expectedNum) == 0) {
+    printf("올바른 번호를 감지했습니다.\n");
+    RGBled(0, 255, 255);
+  } else {
+    printf("올바르지 않은 번호를 감지했습니다.\n");
+    RGBled(255, 255, 0);
+  }
 }
