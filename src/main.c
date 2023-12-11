@@ -9,6 +9,11 @@
 #include "rgb_led.h"
 #include "nfc.h"
 
+// #define RED {255, 255, 0}
+// #define GREEN {0, 255, 255}
+// #define BLUE {255, 0, 255}
+// #define BLACK {255, 255, 255}
+
 int main(void)
 {
     // wiringPi 초기화
@@ -20,6 +25,5 @@ int main(void)
     initializePn532();
     // NFC 카드 읽기
     readNfcCard();
-    // RGBled();
     return 0;
 }
