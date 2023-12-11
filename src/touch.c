@@ -17,7 +17,7 @@ void touchInit()
     printf("HW136 터치패드 초기화 완료\n");
 }
 
-void reedNumPad(){
+void *readNumPad(void *arg){
     printf("터치패드 인식 기다리는 중...\n");
     const char *expectedNum = TOUCH_NUM;
 

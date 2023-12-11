@@ -41,7 +41,7 @@ void initializePn532() {
 }
 
 // NFC 카드 읽기 함수
-void readNfcCard() {
+void *readNfcCard(void *arg) {
     nfc_target nt;
     nfc_context *context;
     nfc_device *pnd;

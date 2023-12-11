@@ -9,7 +9,7 @@
 // #define SDA_PIN 8  // GPIO 8 (Physical pin 24)
 // #define SCL_PIN 9  // GPIO 9 (Physical pin 21)
 
-void initializePn532();
-void readNfcCard();
+void initializePn532(void);
+void *readNfcCard(void *arg);
 void getCurrentUid(unsigned char*, char*);
 void compareUid(char*, const char*);

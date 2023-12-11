@@ -9,7 +9,7 @@
 #define TOUCH_NUM "13131313"
 
 void touchInit(void);
-void reedNumPad(void);
+void *readNumPad(void *arg);
 void getPassword(char*);
 unsigned char readKeypad(void);
 void compareNum(char*, const char*);
