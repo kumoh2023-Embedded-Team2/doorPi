@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "touch.h"
+#include "rgb_led.h"
 
 #define SCL_PIN 8
 #define SDO_PIN 7
@@ -24,6 +25,7 @@ void getPassword(char *password)
         while (readKeypad() == 0x00);
         Key[i] = readKeypad();
         printf("%d\n", Key[i]);
+        RGBled(255, 255, 0);
         delay(1000);
     }
 
