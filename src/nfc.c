@@ -4,6 +4,7 @@
 #include <wiringPi.h>
 #include <string.h>
 #include "nfc.h"
+#include "rgb_led.h"
 
 #define SDA_PIN 8  // GPIO 8 (Physical pin 24)
 #define SCL_PIN 9  // GPIO 9 (Physical pin 21)
@@ -94,7 +95,9 @@ void getCurrentUid(unsigned char* abtUid, char* currentUID) {
 void compareUid(char* currentUID, const char* expectedUID) {
   if (strcmp(currentUID, expectedUID) == 0) {
     printf("올바른 카드를 감지했습니다.\n");
+    RGBled(0, 255, 255);
   } else {
     printf("올바르지 않은 카드를 감지했습니다.\n");
+    RGBled(255, 255, 0);
   }
 }
