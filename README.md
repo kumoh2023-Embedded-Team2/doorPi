@@ -17,7 +17,8 @@ doorPi의 기본이 되는 main.c파일을 비롯한 소스코드 파일들은 s
 # 사용모듈
 
 HW136 넘버패드 모듈 - 4x4 터치인식 숫자패드
-<img src="./readme_img/pn532.png" width="200" height="200"/>
+
+<img src="./readme_img/pn532.png" width="250" height="200"/>
 
 PN532 NFC 모듈 - NFC 인식 패드 + NFC 칩
 
