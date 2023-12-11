@@ -37,8 +37,8 @@ void RGBled(UC R_no, UC G_no, UC B_no)
     // {
         // printf("R, G, B : ");
         // scanf("%hhu %hhu %hhu", &R_no, &G_no, &B_no);
-        printf("R: %u, G: %u, B: %u\n", R_no, G_no, B_no);
-        ledColorSet(R_no, G_no, B_no);
+    printf("R: %u, G: %u, B: %u\n", R_no, G_no, B_no);
+    ledColorSet(R_no, G_no, B_no);
     //     if (R_no + G_no + B_no == 0)
     //         cont = 0;
     // }
