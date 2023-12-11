@@ -6,6 +6,8 @@
 #include "nfc.h"
 #include "rgb_led.h"
 
+#define NFC_UID "ac08796d"
+
 // #define SDA_PIN 8  // GPIO 8 (Physical pin 24)
 // #define SCL_PIN 9  // GPIO 9 (Physical pin 21)
 
@@ -67,7 +69,7 @@ void readNfcCard() {
     modulation.nmt = NMT_ISO14443A;
     modulation.nbr = NBR_106;
 
-    const char *expectedUID = "ac08796d";  // 여기에 실제 UID를 넣어주세요
+    const char *expectedUID = NFC_UID;  // 여기에 실제 UID를 넣어주세요
 
     // NFC 타겟 선택
     while (true) {
