@@ -12,4 +12,4 @@
 
 void ledInit(void);
 void ledColorSet(UC, UC, UC);
-void RGBled(void);
+void RGBled(UC, UC, UC);
