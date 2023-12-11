@@ -67,11 +67,11 @@ unsigned char readKeypad()
 }
 
 void compareNum(char* password, const char* expectedNum) {
-  if (strcmp(password, expectedNum) == 0) {
-    printf("올바른 번호를 감지했습니다.\n");
-    RGBled(0, 255, 255);
-  } else {
-    printf("올바르지 않은 번호를 감지했습니다.\n");
-    RGBled(255, 255, 0);
-  }
+    if (strcmp(password, expectedNum) == 0) {
+        printf("올바른 번호를 감지했습니다.\n");
+        RGBled(0, 255, 255);
+    } else {
+        printf("올바르지 않은 번호를 감지했습니다.\n");
+        RGBled(255, 255, 0);
+    }
 }

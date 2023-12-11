@@ -6,6 +6,7 @@
 #define SDO_PIN 7
 
 #define PW_LEN 4
+#define TOUCH_NUM "13131313"
 
 void touchInit(void);
 void reedNumPad(void);
