@@ -6,8 +6,8 @@
 #include "nfc.h"
 #include "rgb_led.h"
 
-#define SDA_PIN 8  // GPIO 8 (Physical pin 24)
-#define SCL_PIN 9  // GPIO 9 (Physical pin 21)
+// #define SDA_PIN 8  // GPIO 8 (Physical pin 24)
+// #define SCL_PIN 9  // GPIO 9 (Physical pin 21)
 
 // PN532 초기화 함수
 void initializePn532() {
