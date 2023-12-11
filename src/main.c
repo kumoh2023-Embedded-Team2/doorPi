@@ -30,8 +30,6 @@ int main(void)
     // NFC 카드 읽기
     // readNfcCard();
     // 비밀번호 인식
-    char password[32];
-    getPassword(password);
-    printf("%s\n", password);
+    readNumPad();
     return 0;
 }
