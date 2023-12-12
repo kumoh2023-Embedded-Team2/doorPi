@@ -5,8 +5,11 @@
 #include <string.h>
 #include "nfc.h"
 #include "rgb_led.h"
+#include "bt.h"
 
 #define NFC_UID "ac08796d"
+
+#define IN_CHAR 'I'
 
 // #define SDA_PIN 8  // GPIO 8 (Physical pin 24)
 // #define SCL_PIN 9  // GPIO 9 (Physical pin 21)
@@ -41,7 +44,7 @@ void initializePn532() {
 }
 
 // NFC 카드 읽기 함수
-void *readNfcCard(void *arg) {
+void *readNfcCard() {
     nfc_target nt;
     nfc_context *context;
     nfc_device *pnd;
@@ -98,6 +101,7 @@ void compareUid(char* currentUID, const char* expectedUID) {
   if (strcmp(currentUID, expectedUID) == 0) {
     printf("올바른 카드를 감지했습니다.\n");
     RGBled(0, 255, 255);
+    serialWrite(fd_serial, IN_CHAR);
   } else {
     printf("올바르지 않은 카드를 감지했습니다.\n");
     RGBled(255, 255, 0);

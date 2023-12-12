@@ -3,6 +3,7 @@
 #include <nfc/nfc.h>
 #include <wiringPi.h>
 #include <string.h>
+#include "bt.h"
 
 #define NFC_UID "ac08796d"
 
@@ -10,6 +11,6 @@
 // #define SCL_PIN 9  // GPIO 9 (Physical pin 21)
 
 void initializePn532(void);
-void *readNfcCard(void *arg);
+void *readNfcCard();
 void getCurrentUid(unsigned char*, char*);
 void compareUid(char*, const char*);
