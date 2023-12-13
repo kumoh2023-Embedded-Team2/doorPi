@@ -10,6 +10,9 @@
 #include "nfc.h"
 #include "touch.h"
 #include "bt.h"
+#include "btn.h"
+#include "speaker.h"
+#include "servo.h"
 #include <pthread.h>
 
 // RED {255, 255, 0}
@@ -32,22 +35,21 @@ int main(void)
     touchInit();
     // 블루투스 초기화 및 설정
     btInit();
+    // 수동부저 초기화 및 설정
+    initMyTone();
+    // 서보모터 초기화 및 설정
+    servoInit();
 
-    pthread_t ptNfc;
+    pthread_t ptNfc, ptTouch, ptBtn;
     pthread_mutex_t mutex;
     pthread_mutex_init(&mutex, NULL);
     pthread_create(&ptNfc, NULL, readNfcCard, NULL);
+    pthread_create(&ptTouch, NULL, readNumPad, NULL);
+    pthread_create(&ptBtn, NULL, readBtn, NULL);
     pthread_join(ptNfc, NULL);
+    pthread_join(ptTouch, NULL);
+    pthread_join(ptBtn, NULL);
     pthread_mutex_destroy(&mutex);
     
-    // NFC 카드 읽기
-    //readNfcCard();
-    // 비밀번호 인식
-    //readNumPad();
-
-
     return 0;
 }
-
-// TODO: mutex로 readNfcCard, readNumPad 연결 필요
-// TODO: 버튼, 서보모터, 부저 모듈 추가 필요 

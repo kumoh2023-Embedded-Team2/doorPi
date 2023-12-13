@@ -3,6 +3,7 @@
 #include <softPwm.h>
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
+#include "speaker.h"
 
 #define UC unsigned char
 

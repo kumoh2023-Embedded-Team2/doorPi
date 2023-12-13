@@ -18,6 +18,8 @@ void touchInit()
 }
 
 void *readNumPad(void *arg){
+    wiringPiSetupGpio();
+    initMyTone();
     printf("터치패드 인식 기다리는 중...\n");
     const char *expectedNum = TOUCH_NUM;
 
@@ -25,7 +27,6 @@ void *readNumPad(void *arg){
         char password[32];
         getPassword(password);
         printf("인식 번호: %s\n", password);
-
         compareNum(password, expectedNum);
         printf("터치패드 인식 기다리는 중...\n");
     }
