@@ -14,6 +14,7 @@
 #include "speaker.h"
 #include "servo.h"
 #include <pthread.h>
+#include "mutex.h"
 
 // RED {255, 255, 0}
 // GREEN {0, 255, 255}
@@ -41,7 +42,6 @@ int main(void)
     servoInit();
 
     pthread_t ptNfc, ptTouch, ptBtn;
-    pthread_mutex_t mutex;
     pthread_mutex_init(&mutex, NULL);
     pthread_create(&ptNfc, NULL, readNfcCard, NULL);
     pthread_create(&ptTouch, NULL, readNumPad, NULL);

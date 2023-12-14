@@ -4,6 +4,7 @@
 #include <wiringPi.h>
 #include <string.h>
 #include "bt.h"
+#include "servo.h"
 
 #define NFC_UID "ac08796d"
 

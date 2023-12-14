@@ -7,10 +7,11 @@ int fd_serial; //디바이스 파일 서술자
 
 void serialWrite(const int fd, const unsigned char c)
 {   //write 함수를 통해 1바이트 씀 
-    write (fd, &c, 1); 
+    write(fd, &c, 1);
     fflush(stdout);
-    delay(2000);
+    delay(100);
 }
+
 int btInit() {
     static const char* UART2_DEV = "/dev/ttyAMA1"; //UART2 연결을 위한 장치 파일
 

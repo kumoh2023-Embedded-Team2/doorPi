@@ -13,9 +13,10 @@ void servoInit()
 void servoOpen()
 {
     softPwmWrite(SERVO_PIN, MAX_DEGREE);
-    printf("열림 ㅅㄱ\n");
-    delay(5000);
+    // printf("열림 ㅅㄱ\n");
+    delay(4000);
 
     softPwmWrite(SERVO_PIN, NEUTRAL_DEGREE);
-    printf("닫힘 ㅅㄱ\n");
+    // printf("닫힘 ㅅㄱ\n");
+    delay(1000);
 }

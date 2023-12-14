@@ -7,6 +7,7 @@
 #include "rgb_led.h"
 #include "bt.h"
 #include "speaker.h"
+#include "mutex.h"
 
 #define NFC_UID "ac08796d"
 
@@ -98,10 +99,13 @@ void getCurrentUid(unsigned char* abtUid, char* currentUID) {
 void compareUid(char* currentUID, const char* expectedUID) {
   if (strcmp(currentUID, expectedUID) == 0) {
     printf("올바른 카드를 감지했습니다.\n");
+    pthread_mutex_lock(&mutex);
     RGBled(0, 255, 255);
     serialWrite(fd_serial, IN_CHAR);
+    servoOpen();
+    pthread_mutex_unlock(&mutex);
     delay(1000);
-  } else {
+  } else {  
     printf("올바르지 않은 카드를 감지했습니다.\n");
     RGBled(255, 255, 0);
     delay(1000);
