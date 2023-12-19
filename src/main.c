@@ -16,16 +16,9 @@
 #include <pthread.h>
 #include "mutex.h"
 
-// RED {255, 255, 0}
-// GREEN {0, 255, 255}
-// BLUE {255, 0, 255}
-// BLACK {255, 255, 255}
-
 int main(void)
-{
-    // wiringPi 초기화
-    
-    if (wiringPiSetupGpio() == -1) {
+{    
+    if (wiringPiSetupGpio() == -1) { // wiringPi 초기화
         fprintf(stderr, "wiringPi 초기화에 실패했습니다.\n");
         return 1;
     }
@@ -40,16 +33,17 @@ int main(void)
     initMyTone();
     // 서보모터 초기화 및 설정
     servoInit();
-
+    
+    // 스레드 생성 및 실행
     pthread_t ptNfc, ptTouch, ptBtn;
-    pthread_mutex_init(&mutex, NULL);
+    pthread_mutex_init(&mutex, NULL); // 뮤텍스 초기화
     pthread_create(&ptNfc, NULL, readNfcCard, NULL);
     pthread_create(&ptTouch, NULL, readNumPad, NULL);
     pthread_create(&ptBtn, NULL, readBtn, NULL);
-    pthread_join(ptNfc, NULL);
+    pthread_join(ptNfc, NULL); // 스레드 종료 대기
     pthread_join(ptTouch, NULL);
     pthread_join(ptBtn, NULL);
-    pthread_mutex_destroy(&mutex);
+    pthread_mutex_destroy(&mutex); // 뮤텍스 제거
     
     return 0;
 }

@@ -14,6 +14,7 @@
 
 void ledInit()
 {
+    // PWM 핀 초기화
     softPwmCreate(R_PIO, 0, 255);
     softPwmCreate(G_PIO, 0, 255);
     softPwmCreate(B_PIO, 0, 255);
@@ -21,6 +22,7 @@ void ledInit()
 
 void ledColorSet(UC R_no, UC G_no, UC B_no)
 {
+    // LED 색상 설정
     softPwmWrite(R_PIO, R_no);
     softPwmWrite(G_PIO, G_no);
     softPwmWrite(B_PIO, B_no);
@@ -31,20 +33,14 @@ void RGBled(UC R_no, UC G_no, UC B_no)
     pinMode(R_PIO, OUTPUT);
     pinMode(G_PIO, OUTPUT);
     pinMode(B_PIO, OUTPUT);
+
     ledInit();
-    // int cont = 1;
-    // UC R_no, G_no, B_no;
-    // while (cont)
-    // {
-        // printf("R, G, B : ");
-        // scanf("%hhu %hhu %hhu", &R_no, &G_no, &B_no);
-    // printf("R: %u, G: %u, B: %u\n", R_no, G_no, B_no);
+    
+    // LED 색상 설정
     ledColorSet(R_no, G_no, B_no);
-    //     if (R_no + G_no + B_no == 0)
-    //         cont = 0;
-    // }
-    myTone(262);
+    
+    myTone(262); // 스피커로 소리 출력(도)
     delay(1000);
-    initMyTone();
-    ledColorSet(255, 255, 255);
+    initMyTone(); // 스피커 음소거
+    ledColorSet(255, 255, 255); // LED 색상 변경
 }

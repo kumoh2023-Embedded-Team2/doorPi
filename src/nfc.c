@@ -11,13 +11,10 @@
 
 #define NFC_UID "ac08796d"
 
-// #define SDA_PIN 8  // GPIO 8 (Physical pin 24)
-// #define SCL_PIN 9  // GPIO 9 (Physical pin 21)
-
 // PN532 초기화 함수
 void initializePn532() {
-    nfc_context *context;
-    nfc_device *pnd;
+    nfc_context *context; // NFC 컨텍스트(환경)
+    nfc_device *pnd; // NFC 장치(리더기)
 
     // libnfc 초기화 및 리더기 설정
     nfc_init(&context);
@@ -34,21 +31,19 @@ void initializePn532() {
         exit(EXIT_FAILURE);
     }
 
-    // PN532를 위한 SDA 및 SCL 핀 설정
-    nfc_device_set_property_int(pnd, NP_HANDLE_CRC, 1);
-    nfc_device_set_property_int(pnd, NP_HANDLE_PARITY, 0);
-    nfc_device_set_property_int(pnd, NP_HANDLE_PARITY, 7);  // NP_HANDLE_BITS 대신 NP_HANDLE_PARITY 사용
-    nfc_device_set_property_int(pnd, NP_ACTIVATE_FIELD, 1);
+    // PN532 NFC 리더기 초기화
+    nfc_device_set_property_int(pnd, NP_HANDLE_CRC, 1); // CRC 사용 (CRC: 데이터 전송 시 오류 검출을 위한 코드)
+    nfc_device_set_property_int(pnd, NP_ACTIVATE_FIELD, 1); // 필드 활성화(활성화하지 않으면 통신 불가)
 
     printf("PN532 NFC 리더기 초기화 완료\n");
 }
 
 // NFC 카드 읽기 함수
 void *readNfcCard() {
-    nfc_target nt;
-    nfc_context *context;
-    nfc_device *pnd;
-    nfc_modulation modulation;
+    nfc_target nt; // NFC 타겟(카드)
+    nfc_context *context; // NFC 컨텍스트(환경)
+    nfc_device *pnd; // NFC 장치(리더기)
+    nfc_modulation modulation; // NFC 모듈레이션(통신 속도, 통신 방식)
 
     // libnfc 초기화 및 리더기 설정
     nfc_init(&context);
@@ -68,21 +63,20 @@ void *readNfcCard() {
     // NFC 타겟 대기
     printf("NFC 카드를 기다리는 중...\n");
 
-    // Mifare 카드의 경우 NMT_ISO14443A 사용
+    // ISO14443A (MIFARE)를 위한 모드 설정 (ISO14443A: NFC 표준 중 하나)
     modulation.nmt = NMT_ISO14443A;
-    modulation.nbr = NBR_106;
+    modulation.nbr = NBR_106; // 통신 속도 106kbps
 
-    const char *expectedUID = NFC_UID;  // 여기에 실제 UID를 넣어주세요
+    const char *expectedUID = NFC_UID; // 기대하는 카드 UID
 
     // NFC 타겟 선택
     while (true) {
-        if (nfc_initiator_select_passive_target(pnd, modulation, NULL, 0, &nt) > 0) {
-          char currentUID[32];  // 충분한 크기로 지정
-          getCurrentUid(nt.nti.nai.abtUid, currentUID);
+        if (nfc_initiator_select_passive_target(pnd, modulation, NULL, 0, &nt) > 0) { // NFC 타겟이 발견되면
+          char currentUID[32];  // 현재 카드 UID
+          getCurrentUid(nt.nti.nai.abtUid, currentUID); // 현재 카드 UID 가져오기
           // 카드 UID 출력
-          printf("카드 UID: %s\n", currentUID);
-          
-          compareUid(currentUID, expectedUID);
+          printf("카드 UID: %s\n", currentUID); // 현재 카드 UID 출력
+          compareUid(currentUID, expectedUID); // 현재 카드 UID와 저장해 놓은 카드 UID 비교
         }
         delay(1000);
     }
@@ -93,21 +87,21 @@ void *readNfcCard() {
 }
 
 void getCurrentUid(unsigned char* abtUid, char* currentUID) {
-  sprintf(currentUID, "%02x%02x%02x%02x", abtUid[0], abtUid[1], abtUid[2], abtUid[3]);
+  sprintf(currentUID, "%02x%02x%02x%02x", abtUid[0], abtUid[1], abtUid[2], abtUid[3]); // abtUid[0]~abtUid[3]까지 16진수로 변환하여 currentUID에 저장
 }
 
 void compareUid(char* currentUID, const char* expectedUID) {
-  if (strcmp(currentUID, expectedUID) == 0) {
+  if (strcmp(currentUID, expectedUID) == 0) { // 현재 카드 UID와 저장해 놓은 카드 UID가 같으면
     printf("올바른 카드를 감지했습니다.\n");
-    pthread_mutex_lock(&mutex);
-    RGBled(0, 255, 255);
-    serialWrite(fd_serial, IN_CHAR);
-    servoOpen();
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_lock(&mutex); // 뮤텍스 잠금
+    RGBled(0, 255, 255); // LED 점등
+    serialWrite(fd_serial, IN_CHAR); // 블루투스로 'I' 전송
+    servoOpen(); // 서보모터 열기
+    pthread_mutex_unlock(&mutex); // 뮤텍스 잠금 해제
     delay(1000);
   } else {  
     printf("올바르지 않은 카드를 감지했습니다.\n");
-    RGBled(255, 255, 0);
+    RGBled(255, 255, 0); // LED 점등
     delay(1000);
   }
 }
