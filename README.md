@@ -131,16 +131,21 @@ $ sudo ./doorPi
 # 옵션
 
 -lwiringPi
+
 WiringPi 라이브러리를 이용하기 위한 옵션
 
 -lnfc
+
 nfc 라이브러리를 이용하기 위한 옵션
 
 -I/usr/local/include/nfc
+
 nfc 장치 파일을 불러오기 위한 옵션 (환경에 따라 다름)
 
 -L/usr/local/lib
+
 libnfc를 불러오기 위한 옵션
 
 -lpthread
+
 Pthread 라이브러리를 이용하기 위한 옵션
