@@ -57,12 +57,61 @@ Button 모듈 - H형 버튼 모듈
 
 # 실행방법
 
-※ libnfc 라이브러리를 설치하여야함 ※
+### ※ libnfc 라이브러리를 설치하여야함 (https://github.com/nfc-tools/libnfc) ※
+1. 다음 명령어를 순서대로 입력하여 라이브러리를 사용하기 위한 패키지를 설치한다 :
+```
+sudo apt-get update
 
+sudo apt-get install libusb-dev libpcsclite-dev i2c-tools
+```
+
+2. 패키지를 설치한 후 wget 명령어를 사용하여 libnfc 설치용 압축파일을 다운받아 압축을 해제한다:
+```
+cd ~
+
+wget https://github.com/nfc-tools/libnfc/releases/download/libnfc-1.8.0/libnfc-1.8.0.tar.bz2
+
+tar -xf libnfc-1.8.0.tar.bz2
+```
+3. 압축 해제된 libnfc 폴더로 이동하여 라이브러리를 설치해준다 :
+```
+cd libnfc-1.8.0
+
+./configure --prefix=/usr --sysconfdir=/etc
+
+make
+
+sudo make install
+```
+4. nfc 장치파일 폴더에 libnfc.conf 파일을 생성해준다 :
+```
+cd /etc
+
+sudo mkdir nfc
+
+sudo vi /etc/nfc/libnfc.conf
+```
+5. libnfc.conf 파일에 다음 문장들을 추가한다 :
+```
+allow_autoscan = true
+
+allow_intrusive_scan = false
+
+log_level = 1
+
+device.name = "_PN532_I2c"
+
+device.connstring = "pn532_i2c:/dev/i2c-1"
+```
+6. nfc-list 명령을 수행했을 때 nfc 장치를 인식한다면 라이브러리를 사용할 준비가 끝난다.
+
+### ※ 실행 ※
+프로젝트 폴더로 이동하여 다음 명령어들을 실행한다 :
+```
 $ make
 
 $ sudo ./doorPi
-
+```
 # 옵션
 
 -lwiringPi
