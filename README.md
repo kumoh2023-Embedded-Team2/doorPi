@@ -1,10 +1,10 @@
 # doorPi
 
-20180147 김민           LED, NumPad, Button, Buzzer, Servo
+20180147 김민:           LED, NumPad, Button, Buzzer, Servo
 
-20180405 문지혁         NFC, Mutex, 리팩토링
+20180405 문지혁:         NFC, Mutex, 리팩토링
 
-20180060 권수열         BT
+20180060 권수열:         BT
 
 # 개발배경
 
